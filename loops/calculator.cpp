@@ -3,13 +3,10 @@
 using namespace std;
 
 int main() {
-    char symbol;
+    char symbol = '+';
     double res = 0, number;
-    cin >> number;
-    res += number;
 
-    cin >> symbol;
-    while(symbol!='='){
+    while(symbol != '='){
         cin >> number;
         switch (symbol) {
             case '+': res += number; break;
@@ -20,10 +17,11 @@ int main() {
                     res /= number;
                 }
                 break;
+            default: cout << "Invalid character" << endl;
         }
         cin >> symbol;
     }
-
     cout << res << endl;
+
     return 0;
 }
