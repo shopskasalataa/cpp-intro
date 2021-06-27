@@ -4,7 +4,7 @@
 using namespace std;
 int main(){
     int n, m, a[MAXN], b[MAXM], counter = 0;
-    bool visited[MAXN] = {0};
+    
     cin >> n;
     for(int i = 0; i < n; i++){
         cin >> *(a + i);
@@ -15,13 +15,12 @@ int main(){
     }
 
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            if((*(a + i) == *(b + j)) && i < j){
+        for(int j = i + 1; j < m; j++){
+            if((*(a + i) == *(b + j))){
                 counter++;
             }
         }
     }
-    cout << endl;
     cout << counter << endl;
     return 0;
 }

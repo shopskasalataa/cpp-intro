@@ -15,15 +15,14 @@ int main(){
             cin >> *(*(b + i) + j);
         }
     }
-    cout << endl;
+
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
+            sum = 0;
             for(int k = 0; k < n; k++){
                 sum += (*(*(a + i) + k)) * (*(*(b + k) + j));
             }
-            cout << endl;
             *(*(c + i) + j) = sum;
-            sum = 0;
         }
     }
     
@@ -31,7 +30,6 @@ int main(){
         for(int j = 0; j < n; j++){
             cout << *(*(c + i) + j) << " ";
         }
-        cout << endl;
     }  
     return 0;
 }
