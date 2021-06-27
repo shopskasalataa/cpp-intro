@@ -3,12 +3,12 @@
 #define MAXM 100
 using namespace std;
 int main(){
-    int n, m, s_r = 0, e_r, s_c = 0, e_c;
+    int n, m, start_row = 0, end_row, start_column = 0, end_column;
     int a[MAXN][MAXM];
     cin >> n;
     cin >> m;
-    e_r = n;
-    e_c = m;
+    end_row = n;
+    end_column = m;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
             cin >> a[i][j];
@@ -16,30 +16,30 @@ int main(){
     }
 
 
-    while(s_r < e_r && s_c < e_c){
+    while(start_row < end_row && start_column < end_column){
         // print first row
-        for(int i = s_c; i < e_c; i++){
-            cout << a[s_r][i] << " ";
+        for(int i = start_column; i < end_column; i++){
+            cout << a[start_row][i] << " ";
         }
-        s_r++;
+        start_row++;
         //print last col
-        for(int i = s_r; i < e_r; i++){
-            cout <<a[i][e_c - 1] << " ";
+        for(int i = start_row; i < end_row; i++){
+            cout <<a[i][end_column - 1] << " ";
         }
-        e_c--;
+        end_column--;
         //print last row
-        if(s_r < e_r){
-            for(int i = e_c - 1; i >= s_c; i--){
-                cout << a[e_r - 1][i] << " ";
+        if(start_row < end_row){
+            for(int i = end_column - 1; i >= start_column; i--){
+                cout << a[end_row - 1][i] << " ";
             }
-            e_r--;
+            end_row--;
         }
         //print first col
-        if(s_c < e_c){
-            for(int i = e_r - 1; i >= s_r; i--){
-                cout <<a[i][s_c] << " ";
+        if(start_column < end_column){
+            for(int i = end_row - 1; i >= start_row; i--){
+                cout <<a[i][start_column] << " ";
             }
-            s_c++;
+            start_column++;
         }
     }
 
