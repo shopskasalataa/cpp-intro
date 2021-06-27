@@ -2,43 +2,32 @@
 #include <cstring>
 #define MAXN 100
 using namespace std;
-int find_str(char c[], char str[]){
-    char word[MAXN];
-    int counter = 0;
-    for(int i = 0; i < strlen(c); i++){
-        if(c[i] == str[counter]){
-            counter++;
-        }else{
-            if(c[i] == ' '){
-                if(counter == strlen(str)){
-                    return i - strlen(str);
-                }else{
-                    counter = 0;
-                }
-            }
-        }
-    }
-    if(counter == strlen(str)){
-        return strlen(c) - strlen(str);
-    }else{
-        return -1;
-    }
+int find_str(const char word[], const char str[]){
+   int n = strlen(str), m = strlen(word);
+   
+   bool is_word;
+   for(int i=0; i < n - m + 1; i++){
+      is_word = true;
+      for(int j = 0; j < m && is_word; j++) {
+         if(str[i + j] != word[j])
+             is_word = false;
+     }
+     if(is_word) return i;
+   }
+   return -1;
+}
+void reverse(char* str, int n){
+    for(int i=0, j = n-1; i < j; i++, j--)
+        swap(str[i], str[j]);
 }
 int main(){
-    char c[MAXN], str[MAXN];
-    cin.getline(c, MAXN);
+    char word[MAXN], str[MAXN]; //избирай по-добри имена
     cin.getline(str, MAXN);
-    int start = find_str(c, str);
-    int end = start + strlen(str) - 1;
-
-    while(start < end){
-        char temp = c[start];
-        c[start] = c[end];
-        c[end] = temp;
-        start++;
-        end--;
-    }
-    cout << c << endl;
+    cin >> word; //нямаш нужда от getline
+    int start = find_str(word, str);
+    reverse(str+start, strlen(word));
+    
+    cout << str << endl;
     return 0;
 }
 

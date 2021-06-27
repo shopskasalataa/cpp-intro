@@ -43,20 +43,20 @@ p  1
 using namespace std;
 int main(){
     char c[MAXN];
-    bool used[MAXUSED] = {0};
+    int used[MAXUSED] = {0};
     cin >> c;
     for(int i = 0; i < strlen(c); i++){
         char a = c[i];
         int count = 0;
-        if(used[(int)a] == false){
-            for(int j = 0; j < strlen(c); j++){
-                if(a == c[j]){
-                count++;
-                }
-            }
-            cout << a << " " << count << endl;
-            used[(int)a] = true;
+        if(!used[a]){
+            used[a]++;
+        }
+    }
+    for(int i = 0; i < MAXUSED; i++){
+        if(used[i] > 0){
+            cout << (char) i << " " << used[i] << endl;
         }
     }
     return 0;
 }
+//проблемът е, че не ги извежда символите според реда на въвеждане, но пък е бърз!

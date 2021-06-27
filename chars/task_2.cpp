@@ -10,30 +10,23 @@ int main(){
     for(int i = 0; i < n; i++){
         cin >> a[i];
     }
+    
     for(int i = 0; i < n - 1; i++){
-        for(int j = 0; j < n - i - 1; j++){
-            if(strcmp(a[j], a[j + 1]) > 0){
-                char temp[MAXN];
-                strcpy(temp, a[j]);
-                strcpy(a[j], a[j + 1]);
-                strcpy(a[j + 1], temp);
+        curr_count = 1;
+
+        for(int j = i + 1; j < n; j++){
+            if(strcmp(a[i], a[j]) == 0){
+                curr_count++;
             }
+        }
+
+        if(curr_count > max_count){
+            max_count = curr_count;
+            strcpy(name, a[i]);
         }
     }
 
-    for(int i = 0; i < n - 1; i++){
-        if(!strcmp(a[i], a[i + 1])){
-            curr_count++;
-        }else{
-            if(curr_count > max_count){
-                strcpy(name, a[i]);
-                max_count = curr_count;
-                curr_count = 1;
-            }
-        }
-    }
-
-    cout << name << " " << max_count;
+    cout << name << " " << max_count << endl;
     return 0;
 }
 /*

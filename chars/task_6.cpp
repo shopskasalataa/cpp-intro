@@ -2,48 +2,36 @@
 #include <cstring>
 #define MAXN 100
 using namespace std;
-int find_str(char c[], char str[]){
-    char word[MAXN];
-    int counter = 0;
-    for(int i = 0; i < strlen(c); i++){
-        if(c[i] == str[counter]){
-            counter++;
-        }else{
-            if(c[i] == ' '){
-                if(counter == strlen(str)){
-                    return i - strlen(str);
-                }else{
-                    counter = 0;
-                }
-            }
-        }
-    }
-    if(counter == strlen(str)){
-        return strlen(c) - strlen(str);
-    }else{
-        return -1;
-    }
+
+int find_str(const char word[], const char str[]){
+   int n = strlen(str), m = strlen(word);
+   
+   bool is_word;
+   for(int i=0; i < n - m + 1; i++){
+      is_word = true;
+      for(int j = 0; j < m && is_word; j++) {
+         if(str[i + j] != word[j])
+             is_word = false;
+     }
+     if(is_word) return i;
+   }
+   return -1;
 }
-void replace(char c[], char original[], char replacer[]){
-    int start = find_str(c, original);
-    char new_c[MAXN];
-    for(int i = 0; i < start; i++){
-        new_c[i] = c[i];
-    }
-    int count = 0;
-    for(int i = start; i < start + strlen(replacer); i++){
-        new_c[i] = replacer[count];
-        count++;
-    }
-    int i = start + strlen(original);
-    int j = start + strlen(replacer);
-    do{
-        new_c[j] = c[i];
-        i++;
-        j++;
-    }while(c[i] != '\0');
+void replace(char* str, const char* original, const char* replacer){
+    int current_position = 0;
+    char* tmp = new char[strlen(str) * strlen(replacer)]; // worst case scenario
+    strcpy(tmp, "");
     
-    cout << new_c;
+    int position;
+    while((position = find_str(original, str+current_position)) != -1) { //малко е странно, знам
+        strncat(tmp, str + current_position, position);
+        strcat(tmp, replacer);
+        current_position = position + strlen(original);
+    }
+    strcat(tmp, str + current_position);
+    strcpy(str, tmp);
+
+    delete tmp;
 }
 int main(){
     char c[MAXN], original[MAXN], replacer[MAXN];
@@ -51,7 +39,9 @@ int main(){
     cin >> original >> replacer;
     
     replace(c, original, replacer);
-
+    
+    cout << c << endl;
+    
     return 0;
 }
 /*

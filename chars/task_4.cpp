@@ -4,7 +4,8 @@
 #define MAXS 100
 using namespace std;
 void str_cat(char a[MAXN][MAXS], int n){
-    char string[MAXN * MAXS];
+    char string[MAXN * (MAXS + 1)];
+    strcpy(string, "");
 
     // не е нужно да съхраняваме думичките, просто можем да изведем масива от чарове отзад напред
     for(int i = n - 1; i >= 0; i--){
@@ -14,7 +15,7 @@ void str_cat(char a[MAXN][MAXS], int n){
         }
     }
 
-    cout << string;
+    cout << string << endl;
 }
 int main(){
     char a[MAXN][MAXS];
