@@ -12,13 +12,13 @@ int main(){
         cin >> a[i];
     }
     int start = 0, end = n - 1;
-    while(start < end){
+    
+    for(int start = 0, end = n - 1; start < end; start++, end--){
         if(a[start] != a[end]){
             cout << "No" << endl;
+
             return 0;
         }
-        start++;
-        end--;
     }
 
     cout << "Yes" << endl;
@@ -30,7 +30,10 @@ int main(){
 /*
 Задача 2.Въвежда се поредица от символи с дължина N. Да се провери дали редицата е палиндром.
 
-Пример:Вход:8a ! 2 b b 2 ! aИзход: Yes
+Пример:
+Вход:8
+a ! 2 b b 2 ! a
+Изход: Yes
 
 Ограничения: 2 <= N <= 100
 */
