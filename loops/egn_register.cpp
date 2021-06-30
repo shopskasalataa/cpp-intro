@@ -5,33 +5,36 @@ using namespace std;
 
 int main() {
     long long egn, temp;
-    short int num_count = 0, ctrl_num, sex, region, dd, mm, yy, reg_min_num, valid_check = 0, pow = 512;
+    short int num_count = 0, ctrl_num, sex, region, dd, mm, yy, reg_min_num, valid_check = 0, ctrl_num_helper = 512;
     cin >> egn;
     temp = egn;
     ctrl_num = temp % 10;
     temp = temp / 10;
     sex = temp % 10;
-    bool isFemale = sex % 2 != 0;
-    region = temp % 10 + temp / 10 % 10 * 10 + temp / 100 % 10 * 100;
-    temp = temp / 1000;
-    dd = temp % 10 + temp / 10 % 10 * 10;
-    temp = temp / 100;
-    mm = temp % 10 + temp / 10 % 10 * 10;
-    temp = temp / 100;
-    yy = temp % 10 + temp / 10 % 10 * 10;
+    bool isFemale = sex % 2;
+    region = temp % 1000;
+    temp  /= 1000;
+    dd = temp % 100;
+    temp /= 100;
+    mm = temp % 100;
+    temp  /= 100;
+    yy = temp;
     temp = egn;
     while(temp != 0){
         int x = temp % 10;
         temp = temp / 10;
         num_count++;
         if(num_count > 1){
-            valid_check += x*pow;
-            pow = pow / 2;
+            valid_check += x* ctrl_num_helper;
+            ctrl_num_helper = ctrl_num_helper / 2;
         }
     }
     valid_check = (valid_check % 11) % 10;
-    if(valid_check == ctrl_num) {
-        if (num_count < 10) {
+    if(valid_check != ctrl_num){
+        cout << "Invalid EGN" << endl;
+        return 0;
+    }
+    if (num_count < 10) {
             cout << "0";
             if (num_count < 9) {
                 cout << "0";
@@ -190,9 +193,6 @@ int main() {
                 cout << "1 boy";
             }
         }
-        cout << " being born before " << ((isFemale) ? "her" : "him") << " in that day." << endl;
-    }else{
-        cout << "Invalid EGN" << endl;
-    }
+        cout << " being born before " << ((isFemale) ? "her" : "him") << " in that day." << endl;   
     return 0;
 }
