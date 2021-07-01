@@ -9,19 +9,18 @@ int main(){
         cin >> a[i];
     }
     int start = 0, end = 0, max = 0, curr_start = 0, curr_end = 0, curr_max = 1;
+    a[n] = a[n-1] + 1;
     for(int i = 0; i < n - 1; i++){
         if(a[i] == a[i + 1]){
             curr_max++;
-            curr_end = i + 1;
         }else{
             curr_start = i + 1;
             curr_max = 1;
-            curr_end = curr_start;
         }
         if(curr_max > max){
             max = curr_max;
             start = curr_start;
-            end = curr_end;
+            end = i + 1;
         }
     }
 

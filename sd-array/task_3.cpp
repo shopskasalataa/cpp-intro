@@ -3,47 +3,24 @@ using namespace std;
 int main(){
     const int MAX = 1024;
     int n, a[MAX], k, gcd = 1;
-    do{
-        cin >> n >> k;
+    
+    cin >> n >> k;
         
-        int x = n, y = k;
-        while(x != y){
-            if(x < y){
-                int tmp = x;
-                x = y;
-                y = tmp;
-            }
-            x -= y;
-        }
-        gcd = x;
-
-        if(gcd != 1){
-            cout << "Please insert two numbers whose greatest common divisor is 1" << endl;
-        }
-    }while(gcd != 1);
-
+    int x = n, y = k;
     for(int i = 0; i < n; i++){
         cin >> a[i];
     }
 
-    int count = n - 1;
-    int i = 0;
-    cout << a[i] << " ";
-    while(count > 0){
-        if(i + k > n){
-            if(!(n % 2)){
-                i = ((i + 1 + k) % k) + 1;
-            }
-            else{
-                i = ((i + 1 + k) % k);
-            }
-            cout << a[i] << " ";
-        }else{
-            cout << a[i + k] << " ";
-            i = i + k;
-        }
-        count--;
+    int position = 0;
+    while(n > 1){
+        if(position >= n) position = position % n;
+        cout << a[position] << " ";
+        for(int i = position; i < n - 1; i++)
+            a[i] = a[i + 1];
+       n--;
+       position = position - 1 + k;
     }
+    cout << a[0] << endl;
 
     return 0;
 }
@@ -66,7 +43,7 @@ N-те числа, разположени в кръг.
 10 3
 1 2 3 4 5 6 7 8 9 10
 Изход:
-1 4 7 10 3 6 9 2 5 8
+1 4 7 10 5 9 6 3 8 2
 
 Ограничения: 2 <= N <= 1024
 */
